@@ -9,24 +9,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api.lista.jogos/auth")
+@RequestMapping("/api.lista.jogos/")
 public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
-    private List<User> user = new ArrayList<>();
-
+    Map<String, Object> response = new HashMap<>();
     @GetMapping
-    public String ver(){
-        return "Opa";
+    public Map<String,Object> ver(){
+    	response.clear();
+        return response;
     }
 
     @PostMapping("/login")
-    public String singIn(@RequestBody @NotNull User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
+    public Map<String,Object> singIn(@RequestBody @NotNull User usuario){
+    	response.clear();
+        String username = usuario.getUsername();
+        String password = usuario.getPassword();
 
         Optional<User> authenticated_user = userRepository.findByUsernameAndPassword(username,password);
-        return "Usuario logado";
+        return response;
+    }
+    
+    /**
+     * Cadastrar usuario no banco 
+     * @param usuario
+     */
+    @PostMapping("/cadastro")
+    public Map<String, Object> singUp(@RequestBody @NotNull User usuario) {
+    	response.clear();
+    	try {
+//    		userRepository.save(usuario);
+    		response.put("result", "Usuario cadastrado com sucesso!");
+    		
+    	}catch (Exception e) {
+			// TODO: handle exception
+    		response.put("result", "Erro durante o cadastro! Tente novamente em alguns minutos.");
+		}
+    	return response;
     }
 }
