@@ -18,7 +18,6 @@ public class LoginController {
 
     @GetMapping
     public String ver(){
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return "Opa";
     }
 
