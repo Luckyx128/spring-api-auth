@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
     private Map<String, Object> response = new HashMap<>();
-    private HashConvert hexconvert = new HashConvert();
+    private HashConvert heshconvert = new HashConvert();
     private User user = new User();
     
     @GetMapping
@@ -33,16 +33,19 @@ public class LoginController {
     	response.clear();
         String username = user.getUsername();
         String password = user.getPassword();
-        
+        String formated_password = null;
         try {
-			hexconvert.gerarHash(password);
+        	formated_password = heshconvert.gerarHash(password);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        Optional<User> authenticated_user = userRepository.findByUsernameAndPassword(username,password);
-        response.put("result", authenticated_user);
+        Optional<User> authenticated_user = userRepository.findByUsernameAndPassword(username,formated_password);
+        if(authenticated_user.isPresent()) {
+        	response.put("result", authenticated_user);        	
+        }else {
+        	response.put("result", "Nenhum usuario localizado com esse login e senha!");
+        }
         
         return response;
     }
@@ -55,6 +58,7 @@ public class LoginController {
     public Map<String, Object> singUp(@RequestBody @NotNull User user) {
     	response.clear();
     	try {
+    		user.setPassword(heshconvert.gerarHash(user.getPassword()));
     		userRepository.save(user);
     		response.put("result", "Usuario cadastrado com sucesso!");
     		

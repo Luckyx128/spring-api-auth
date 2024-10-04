@@ -4,7 +4,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashConvert {
-	
+	/**
+	 * 
+	 * @param valor
+	 * @return String da senha formatada
+	 * @throws NoSuchAlgorithmException
+	 */
 	public String gerarHash(String valor) throws NoSuchAlgorithmException{
 		
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
