@@ -42,6 +42,7 @@ public class LoginController {
 		}
         Optional<User> authenticated_user = userRepository.findByUsernameAndPassword(username,formated_password);
         if(authenticated_user.isPresent()) {
+        	//TODO gerar token autenticado
         	response.put("result", authenticated_user);        	
         }else {
         	response.put("result", "Nenhum usuario localizado com esse login e senha!");
