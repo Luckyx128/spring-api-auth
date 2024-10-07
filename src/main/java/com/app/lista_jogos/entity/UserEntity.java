@@ -31,6 +31,13 @@ public class UserEntity {
     @Column(name = "password",nullable = false)
     private String password;
     
+    @Column(name = "role", nullable = false)
+    private String role = "USER";
+    
+    @ManyToOne
+    @JoinColumn(name =  "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_role"))
+    private RoleEntity roleEntity;
+    
     public UserEntity(UserDTO usuario) {
 		BeanUtils.copyProperties(usuario, this);
 	}
