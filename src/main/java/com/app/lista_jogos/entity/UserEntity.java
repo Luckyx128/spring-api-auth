@@ -1,18 +1,22 @@
-package com.app.lista_jogos.model;
+package com.app.lista_jogos.entity;
+
+import java.util.Objects;
+
+import org.springframework.beans.BeanUtils;
+
+import com.app.lista_jogos.dto.UserDTO;
+
 
 import jakarta.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_user;
+    private long id;
 
-    @Column(name = "username",nullable = false,length = 50)
+    @Column(name = "username",nullable = false,length = 50,unique = true)	
     private String username;
 
     @Column(name = "name",nullable = false,length = 100)
@@ -26,13 +30,21 @@ public class User {
 
     @Column(name = "password",nullable = false)
     private String password;
-
-	public long getId_user() {
-		return id_user;
+    
+    public UserEntity(UserDTO usuario) {
+		BeanUtils.copyProperties(usuario, this);
 	}
 
-	public void setId_user(long id_user) {
-		this.id_user = id_user;
+    public UserEntity() {
+		
+	}
+
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -74,7 +86,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserEntity other = (UserEntity) obj;
+		return Objects.equals(id, other.id);
+	}
 
 }
