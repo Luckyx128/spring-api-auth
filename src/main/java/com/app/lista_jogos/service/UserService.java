@@ -25,9 +25,9 @@ public class UserService {
 	}
 	
 	public void insert(UserDTO usuario) {
-		UserEntity userEntity = new UserEntity(usuario);
-		userEntity.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		userRepository.save(userEntity);
+		UserEntity usuarioEntity = new UserEntity(usuario);
+		usuarioEntity.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		userRepository.save(usuarioEntity);
 	}
 	
 	public UserDTO update(UserDTO usuario) {

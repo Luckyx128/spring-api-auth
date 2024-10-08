@@ -1,6 +1,7 @@
 package com.app.lista_jogos.dto;
 
 public class AuthenticationDTO {
+
 	private String username;
 	private String password;
 	
@@ -16,4 +17,5 @@ public class AuthenticationDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 }

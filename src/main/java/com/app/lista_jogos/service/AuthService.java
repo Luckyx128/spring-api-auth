@@ -14,18 +14,20 @@ import com.app.lista_jogos.security.jwt.JwtUtils;
 @Service
 public class AuthService {
 	
-	private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticatioManager;
 	
 	@Autowired
 	private JwtUtils jwtUtils;
+	
 	public AcessDTO login(AuthenticationDTO authDto) {
 		try {
 			
 		//Cria mecanismo de credencial para o spring
-		UsernamePasswordAuthenticationToken userAuth =
-				new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
+			UsernamePasswordAuthenticationToken userAuth = 
+					new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
 		//Prepara mecanismo para autenticação
-		Authentication authentication = authenticationManager.authenticate(userAuth);
+			Authentication authentication = authenticatioManager.authenticate(userAuth);
 		
 		//Busca usuario logado
 		UserDetailsImpl userAutenticate = (UserDetailsImpl)authentication.getPrincipal();
@@ -37,7 +39,8 @@ public class AuthService {
 		return acessDTO;
 		}catch (BadCredentialsException e) {
 			// TODO: Login ou senha invalida
+			return new AcessDTO(e.getMessage());
+
 		}
-		return null;
 	}
 }
