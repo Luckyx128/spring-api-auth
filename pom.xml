@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.app</groupId>
-	<artifactId>lista-jogos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>lista-jogos-api</artifactId>
+	<version>0.5.</version>
 	<name>lista-jogos</name>
 	<description>Projeto API de lista jogos</description>
 	<url/>

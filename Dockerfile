@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiando o arquivo JAR gerado pelo Maven/Gradle para o container
-COPY target/back-lista-jogos.jar app.jar
+COPY target/lista-jogos-api-0.5..jar app.jar
 
 # Porta exposta pelo container
 EXPOSE 8080
