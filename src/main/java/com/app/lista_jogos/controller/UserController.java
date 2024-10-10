@@ -32,7 +32,7 @@ public class UserController {
 			return userService.listAll();
 		}
 
-		@PostMapping
+		@PostMapping(value = "/cadastrar")
 		public void insert(@RequestBody UserDTO usuario) {
 			userService.insert(usuario);
 		}
