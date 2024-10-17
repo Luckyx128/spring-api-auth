@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class RoleEntity {
- //TODO Tabela de niveis de acesso
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

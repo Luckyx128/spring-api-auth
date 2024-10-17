@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/lista-jogos-api-0.5..jar lista-jogos-api-0.5..jar
 
 # Porta exposta pelo container
-EXPOSE 8080
+EXPOSE 9090
 
 # Comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "lista-jogos-api-0.5..jar"]

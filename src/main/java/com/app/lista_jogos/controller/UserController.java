@@ -31,6 +31,11 @@ public class UserController {
 		public List<UserDTO> listarTodos(){
 			return userService.listAll();
 		}
+		
+		@GetMapping(value = "/{id}")
+		public UserDTO buscarUsuarioPeloId(@PathVariable("id") Long id) {
+			return userService.buscarPorId(id);
+		}
 
 		@PostMapping(value = "/cadastrar")
 		public void insert(@RequestBody UserDTO usuario) {
@@ -43,7 +48,7 @@ public class UserController {
 		}
 		
 		//http://endereco/usuario/3
-		@DeleteMapping("/{id}")
+		@DeleteMapping(value = "/{id}")
 		public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
 			userService.excluir(id);
 			return ResponseEntity.ok().build();
