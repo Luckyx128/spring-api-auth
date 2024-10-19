@@ -8,18 +8,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.lista_jogos.dto.UserDTO;
+import com.app.lista_jogos.entity.RoleEntity;
 import com.app.lista_jogos.entity.UserEntity;
+import com.app.lista_jogos.repository.RoleRepository;
 import com.app.lista_jogos.repository.UserRepository;
 
 @Service
 public class UserService {
 	
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	private Optional<UserEntity> targetUser;
+	
 	
 	public List<UserDTO> listAll(){
 		List<UserEntity> usuarios = userRepository.findAll();
@@ -27,7 +32,10 @@ public class UserService {
 	}
 	
 	public void insert(UserDTO usuario) {
+		Optional<RoleEntity> roleEntity = roleRepository.findById(1);
 		UserEntity usuarioEntity = new UserEntity(usuario);
+		//TODO Verificart se role id foi encontrado
+		usuarioEntity.setRole(roleEntity.get());
 		usuarioEntity.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		userRepository.save(usuarioEntity);
 	}

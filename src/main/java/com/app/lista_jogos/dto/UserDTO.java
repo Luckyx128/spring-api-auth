@@ -12,7 +12,14 @@ public class UserDTO {
 	private String password;
 	private String phone_number;
 	private String email;
+	private Long   role;
 	
+	public Long getRole() {
+		return role;
+	}
+	public void setRole(Long role) {
+		this.role = role;
+	}
 	public UserDTO(UserEntity usuario) {
 		BeanUtils.copyProperties(usuario, this);
 	}

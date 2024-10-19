@@ -1,6 +1,7 @@
 package com.app.lista_jogos.entity;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 
@@ -30,13 +31,13 @@ public class UserEntity {
 
     @Column(name = "password",nullable = false)
     private String password;
-    
-    @Column(name = "role", nullable = false)
-    private String role = "USER";
-    
-    @ManyToOne
+       
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name =  "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_role"))
     private RoleEntity roleEntity;
+    
+   
+
     
     public UserEntity(UserDTO usuario) {
 		BeanUtils.copyProperties(usuario, this);
@@ -104,6 +105,11 @@ public class UserEntity {
 			return false;
 		UserEntity other = (UserEntity) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public void setRole(RoleEntity roleEntity2) {
+				this.roleEntity = roleEntity2;
+					
 	}
 
 }
