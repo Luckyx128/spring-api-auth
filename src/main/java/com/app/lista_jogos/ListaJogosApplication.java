@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ListaJogosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ListaJogosApplication.class, args);
+			SpringApplication.run(ListaJogosApplication.class, args);
 	}
 
 }
