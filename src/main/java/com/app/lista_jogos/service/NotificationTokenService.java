@@ -14,17 +14,32 @@ import com.app.lista_jogos.repository.UserRepository;
 @Service
 public class NotificationTokenService {
 
-	@Autowired
-	private NotificationTokenRepository notificationTokenRepository;
-	@Autowired
-	private UserRepository userRepository;
-	
-	
-	public void saveNotificationToken(NotificationTokenDTO notificationTokenDTO) {
-		NotificationTokenEntity notificationTokenEntity = new NotificationTokenEntity(notificationTokenDTO);
-		Optional<UserEntity> optional = userRepository.findById(notificationTokenDTO.getUser_id());
-		notificationTokenEntity.setUserEntity(optional.get());
-		notificationTokenRepository.save(notificationTokenEntity);
-	}
-	
+    @Autowired
+    private NotificationTokenRepository notificationTokenRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+
+    public void saveNotificationToken(NotificationTokenDTO notificationTokenDTO) {
+        NotificationTokenEntity notificationTokenNew = new NotificationTokenEntity(notificationTokenDTO);
+
+        Optional<UserEntity> userEntity = userRepository.findByUsername(notificationTokenDTO.getUsername());
+
+        Optional<NotificationTokenEntity> notificationTokenOld = notificationTokenRepository.findByUserEntity(userEntity.get());
+        if (notificationTokenOld.isPresent()){
+
+            System.out.println("Atualizando token!");
+            NotificationTokenEntity notificationToken = notificationTokenOld.get();
+            notificationToken.setToken(notificationTokenDTO.getToken());
+            notificationTokenRepository.save(notificationToken);
+
+        } else if (userEntity.isPresent()) {
+
+            System.out.println("Salvando novo token!");
+            notificationTokenNew .setUserEntity(userEntity.get());
+            notificationTokenRepository.save(notificationTokenNew);
+
+        }
+    }
+
 }

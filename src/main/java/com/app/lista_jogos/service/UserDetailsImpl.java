@@ -10,7 +10,6 @@ import com.app.lista_jogos.entity.UserEntity;
 
 public class UserDetailsImpl implements UserDetails{
 
-	private Long id;
 	
 	private String name;
 	
@@ -21,10 +20,9 @@ public class UserDetailsImpl implements UserDetails{
 	private String password;
 	
 	
-	public UserDetailsImpl(Long id, String name, String username, String password, String email,
+	public UserDetailsImpl(String name, String username, String password, String email,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.password = password;
@@ -35,7 +33,6 @@ public class UserDetailsImpl implements UserDetails{
 	public static UserDetailsImpl build(UserEntity usuario) {
 		
 		return new UserDetailsImpl(
-				usuario.getId(), 
 				usuario.getName(), 
 				usuario.getUsername(),
 				usuario.getPassword(),

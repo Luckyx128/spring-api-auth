@@ -32,7 +32,7 @@ public class NotificationTokenEntity {
 	private String token;
 	
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "fk_user"))
+    @JoinColumn(unique = true,name = "username",referencedColumnName = "username",foreignKey = @ForeignKey(name = "fk_token_username"))
     private UserEntity userEntity;
     
     

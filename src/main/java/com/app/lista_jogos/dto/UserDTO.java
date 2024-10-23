@@ -6,7 +6,6 @@ import com.app.lista_jogos.entity.UserEntity;
 
 public class UserDTO {
 	
-	private Long id;	
 	private String name;	
 	private String username;	
 	private String password;
@@ -25,12 +24,6 @@ public class UserDTO {
 	}
 	public UserDTO() {
 		
-	}
-	public Long getId_user() {
-		return id;
-	}
-	public void setId_user(Long id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

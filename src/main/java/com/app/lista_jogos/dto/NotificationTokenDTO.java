@@ -14,7 +14,7 @@ import lombok.Setter;
 public class NotificationTokenDTO {
 	
 	private String token;
-	private Long user_id;
+	private String username;
 	
 	
 	public NotificationTokenDTO() {

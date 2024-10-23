@@ -1,7 +1,6 @@
 package com.app.lista_jogos.entity;
 
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 
@@ -13,10 +12,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+	@Id
     @Column(name = "username",nullable = false,length = 50,unique = true)	
     private String username;
 
@@ -33,7 +29,7 @@ public class UserEntity {
     private String password;
        
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name =  "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_role"))
+    @JoinColumn(name =  "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_role"))
     private RoleEntity roleEntity;
     
    
@@ -45,14 +41,6 @@ public class UserEntity {
 
     public UserEntity() {
 		
-	}
-
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -104,7 +92,7 @@ public class UserEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		UserEntity other = (UserEntity) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(username, other.username);
 	}
 
 	public void setRole(RoleEntity roleEntity2) {

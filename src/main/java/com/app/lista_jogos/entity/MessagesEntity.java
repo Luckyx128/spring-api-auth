@@ -4,11 +4,15 @@ import org.springframework.beans.BeanUtils;
 
 import com.app.lista_jogos.dto.MessagesDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,17 +23,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "messages")
 public class MessagesEntity {
-	@Override
-	public String toString() {
-		return "MessagesEntity [data_envio=" + data_envio + ", motivo=" + motivo + ", conteudo=" + conteudo + "]";
-	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@Column(name = "matricula_destino",nullable = false)
-	private String matricula;
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username",referencedColumnName = "username",foreignKey = @ForeignKey(name = "fk_messages_users"))
+    private UserEntity userEntity;
 	
 	@Column(name = "data_envio",nullable = false)
 	private String data_envio;
