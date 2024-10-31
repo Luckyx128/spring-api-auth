@@ -33,7 +33,7 @@ public class MessagesEntity {
     private UserEntity userEntity;
 	
 	@Column(name = "data_envio",nullable = false)
-	private String data_envio;
+	private String dataenvio;
 	
 	@Column(name = "motivo",nullable = false)
 	private String motivo;

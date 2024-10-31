@@ -8,7 +8,7 @@ public class MessagesDTO {
 	
 	private Long id_messages;
 	private String matricula;
-	private String data_envio;
+	private String dataenvio;
 	private String motivo;
 	private String conteudo;
 	
@@ -34,12 +34,12 @@ public class MessagesDTO {
 		this.matricula = matricula;
 	}
 
-	public String getData_envio() {
-		return data_envio;
+	public String getDataenvio() {
+		return dataenvio;
 	}
 
-	public void setData_envio(String data_envio) {
-		this.data_envio = data_envio;
+	public void setDataenvio(String data_envio) {
+		this.dataenvio = data_envio;
 	}
 
 	public String getMotivo() {

@@ -33,7 +33,7 @@ public class NotificationTokenService {
             notificationToken.setToken(notificationTokenDTO.getToken());
             notificationTokenRepository.save(notificationToken);
 
-        } else if (userEntity.isPresent()) {
+        } else {
 
             System.out.println("Salvando novo token!");
             notificationTokenNew .setUserEntity(userEntity.get());

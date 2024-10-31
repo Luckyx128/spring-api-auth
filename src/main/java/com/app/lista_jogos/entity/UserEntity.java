@@ -2,6 +2,8 @@ package com.app.lista_jogos.entity;
 
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import com.app.lista_jogos.dto.UserDTO;
@@ -9,10 +11,12 @@ import com.app.lista_jogos.dto.UserDTO;
 
 import jakarta.persistence.*;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class UserEntity {
-	@Id
+    @Id
     @Column(name = "username",nullable = false,length = 50,unique = true)	
     private String username;
 
@@ -43,46 +47,6 @@ public class UserEntity {
 		
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone_number() {
-		return phone_number;
-	}
-
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
