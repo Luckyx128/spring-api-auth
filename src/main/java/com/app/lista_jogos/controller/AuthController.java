@@ -1,6 +1,7 @@
 package com.app.lista_jogos.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.lista_jogos.dto.AuthenticationDTO;
 import com.app.lista_jogos.service.AuthService;
+import com.app.lista_jogos.service.RefreshToken;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,4 +25,15 @@ public class AuthController {
 	public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto){
 		return ResponseEntity.ok(authService.login(authDto));
 	}
+	
+	@PostMapping("/refresh-token")
+	public ResponseEntity<?> refreshToken(@RequestBody RefreshToken refreshToken) {
+	    if(authService.refreshToken(refreshToken.getToken()) != null)	{
+		
+	    	return ResponseEntity.ok(authService.refreshToken(refreshToken.getToken()));
+	    } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token is invalid!");
+	    }
+	}
 }
+

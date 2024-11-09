@@ -20,9 +20,16 @@ public class MessagesService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<MessagesEntity> verMenssagens() {
-		return messagesRepository.findAll();
-		
+	public List<MessagesEntity> verMenssagens(String matricula) {
+		Optional<UserEntity> userEntity = userRepository.findByUsername(matricula);
+		if(userEntity.isPresent()) {
+			Optional<List<MessagesEntity>> messagesOptional = messagesRepository.findByUserEntityOrderByDataenvioDesc(userEntity.get());			
+			if(messagesOptional.isPresent()) {
+				
+				return messagesOptional.get();
+			}
+		}
+		return null;
 	}
 	
 	public void enviarMensagens(MessagesDTO mensagem){

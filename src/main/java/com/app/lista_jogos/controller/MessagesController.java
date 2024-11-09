@@ -25,7 +25,7 @@ public class MessagesController {
 	
 	@GetMapping(value = "/{matricula}")
 	public List<MessagesEntity> verMensagens(@PathVariable("matricula") String matricula) {
-		return messagesService.verMenssagens();
+		return messagesService.verMenssagens(matricula);
 //		TODO FInalizar função para ler os as mensagens 
 	}
 	

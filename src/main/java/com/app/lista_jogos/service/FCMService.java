@@ -25,8 +25,8 @@ public class FCMService {
     	
     	NotificationTokenEntity notificationTokenEntity = optionalNotification.get(0);
     	String token = notificationTokenEntity.getToken();
-    	String title = "Teste de notificação API JAVA";
-    	String body  = "Essa notificação foi enviada pelo java para chegar até você!";
+    	String title = "Nova mensagem para você!";
+    	String body  = "Venha conferir as ultimas atualizações!";
     	Message message = Message.builder()
             .setToken(token)
             .setNotification(Notification.builder()
