@@ -6,7 +6,7 @@ import com.app.lista_jogos.entity.UserEntity;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserEntity,Long> {
+public interface UserRepository extends JpaRepository<UserEntity,String> {
 	/**
 	 * Procura no banco um usuario que contenha o username e password enviados.
 	 * @param username

@@ -33,7 +33,7 @@ public class UserController {
 		}
 		
 		@GetMapping(value = "/{id}")
-		public UserDTO buscarUsuarioPeloId(@PathVariable("id") Long id) {
+		public UserDTO buscarUsuarioPeloId(@PathVariable("id") String id) {
 			return userService.buscarPorId(id);
 		}
 
@@ -49,7 +49,7 @@ public class UserController {
 		
 		//http://endereco/usuario/3
 		@DeleteMapping(value = "/{id}")
-		public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+		public ResponseEntity<Void> excluir(@PathVariable("id") String id){
 			userService.excluir(id);
 			return ResponseEntity.ok().build();
 		}

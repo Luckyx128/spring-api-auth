@@ -65,12 +65,12 @@ public class UserService {
 		}
 	}
 	
-	public void excluir(Long id) {
+	public void excluir(String id) {
 		UserEntity usuario = userRepository.findById(id).get();
 		userRepository.delete(usuario);
 	}
 	
-	public UserDTO buscarPorId(Long id) {
+	public UserDTO buscarPorId(String id) {
 		return new UserDTO(userRepository.findById(id).get());
 	}
 }
