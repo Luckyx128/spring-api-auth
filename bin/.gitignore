@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/bin/
+
+.env
+/aviso-plansul-firebase-adminsdk-wjf10-fc3a5dc137.json
+/src/main/resources/aviso-plansul-firebase-adminsdk-wjf10-2b640b72e0.json

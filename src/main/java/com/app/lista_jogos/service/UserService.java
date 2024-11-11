@@ -31,9 +31,11 @@ public class UserService {
 	}
 	
 	public void insert(UserDTO usuario) {
+
 		Optional<RoleEntity> roleEntity = roleRepository.findById(1);
+
 		UserEntity usuarioEntity = new UserEntity(usuario);
-		//TODO Verificart se role id foi encontrado
+
 		usuarioEntity.setRole(roleEntity.get());
 		usuarioEntity.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		userRepository.save(usuarioEntity);
