@@ -18,50 +18,50 @@ import com.app.lista_jogos.security.jwt.JwtUtils;
 
 @Service
 public class AuthService {
-	
+
 	@Autowired
 	private AuthenticationManager authenticatioManager;
 
 	@Autowired
-    private UserDetailServiceImpl UserDetailServiceImpl;
-	
+	private UserDetailServiceImpl UserDetailServiceImpl;
+
 	@Autowired
 	private JwtUtils jwtUtils;
-	
-	public AcessDTO login(AuthenticationDTO authDto) {
-		try {
-			
-		//Cria mecanismo de credencial para o spring
-			UsernamePasswordAuthenticationToken userAuth = 
-					new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
-		//Prepara mecanismo para autenticação
-			Authentication authentication = authenticatioManager.authenticate(userAuth);
-		
-		//Busca usuario logado
-		UserDetailsImpl userAutenticate = (UserDetailsImpl)authentication.getPrincipal();
-		
-		String token = jwtUtils.genereteTokenFromUserDetailsImpl(userAutenticate);
-		String refreshToken = jwtUtils.generateRefreshToken(userAutenticate);
 
-            return new AcessDTO(token,refreshToken);
-		}catch (BadCredentialsException e) {
+	public AcessDTO login(AuthenticationDTO authDto) {
+		
+		try {
+
+			// Cria mecanismo de credencial para o spring
+			UsernamePasswordAuthenticationToken userAuth = new UsernamePasswordAuthenticationToken(
+					authDto.getUsername(), authDto.getPassword());
+			// Prepara mecanismo para autenticação
+			Authentication authentication = authenticatioManager.authenticate(userAuth);
+
+			// Busca usuario logado
+			UserDetailsImpl userAutenticate = (UserDetailsImpl) authentication.getPrincipal();
+
+			String token = jwtUtils.genereteTokenFromUserDetailsImpl(userAutenticate);
+			String refreshToken = jwtUtils.generateRefreshToken(userAutenticate);
+
+			return new AcessDTO(token, refreshToken);
+		} catch (BadCredentialsException e) {
 			throw e;
 		}
 	}
+
 	public AcessDTO refreshToken(String token) throws UsernameNotFoundException {
 		boolean validate = jwtUtils.validateRefreshToken(token);
-		if(validate) {
-			 String username = jwtUtils.getUsernameFromRefreshToken(token);	
-			
-			 UserDetailsImpl userDetails = UserDetailServiceImpl.loadUserByUsername(username);
-			 String newAcessToken = jwtUtils.genereteTokenFromUserDetailsImpl(userDetails);
-			 String refreshToken = jwtUtils.generateRefreshToken(userDetails);
+		if (validate) {
+			String username = jwtUtils.getUsernameFromRefreshToken(token);
 
-            return new AcessDTO(newAcessToken,refreshToken);
+			UserDetailsImpl userDetails = UserDetailServiceImpl.loadUserByUsername(username);
+			String newAcessToken = jwtUtils.genereteTokenFromUserDetailsImpl(userDetails);
+			String refreshToken = jwtUtils.generateRefreshToken(userDetails);
+
+			return new AcessDTO(newAcessToken, refreshToken);
 		}
 		return null;
-		
+
 	}
 }
-
-	

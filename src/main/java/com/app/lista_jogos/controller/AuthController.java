@@ -23,6 +23,9 @@ public class AuthController {
 	
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto){
+		if(authDto.getUsername().isBlank() || authDto.getPassword().isBlank()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Campos vazios!");
+		}
 		return ResponseEntity.ok(authService.login(authDto));
 	}
 	
