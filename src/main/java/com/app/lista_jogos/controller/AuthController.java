@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.lista_jogos.dto.AuthenticationDTO;
+import com.app.lista_jogos.handler.BusinessException;
 import com.app.lista_jogos.service.AuthService;
 import com.app.lista_jogos.service.RefreshToken;
 
@@ -24,7 +25,7 @@ public class AuthController {
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto){
 		if(authDto.getUsername().isBlank() || authDto.getPassword().isBlank()) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Campos vazios!");
+			throw new BusinessException("O login e senja são obrigatórios");
 		}
 		return ResponseEntity.ok(authService.login(authDto));
 	}
