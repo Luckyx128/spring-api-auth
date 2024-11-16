@@ -2,6 +2,7 @@ package com.app.lista_jogos.security.jwt;
 
 import java.io.IOException;
 
+import com.app.lista_jogos.handler.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,21 +33,23 @@ public class AuthFilterToken extends OncePerRequestFilter{
 		try {
 			String jwt = getToken(request);
 			if(jwt != null && jwtUtil.validadeJwtToken(jwt)) {
-				
+
 				String username = jwtUtil.getUsernameToken(jwt);
-				
+
 				UserDetails userDetails = userDetailService.loadUserByUsername(username);
 				UsernamePasswordAuthenticationToken auth =
-						new UsernamePasswordAuthenticationToken(userDetails,  null, userDetails.getAuthorities());
+						new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 				auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				
+
 				SecurityContextHolder.getContext().setAuthentication(auth);
+			}else{
+				throw new BusinessException("Token vencido ou invalido!");
 			}
 			
 		}catch(Exception e) {
 			System.out.println("Ocorreu um erro ao proecssar o token");
 		}finally {
-			
+
 		}
 		
 		filterChain.doFilter(request, response);

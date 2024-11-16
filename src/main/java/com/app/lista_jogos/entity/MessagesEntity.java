@@ -1,19 +1,10 @@
 package com.app.lista_jogos.entity;
 
+import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
 import com.app.lista_jogos.dto.MessagesDTO;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 

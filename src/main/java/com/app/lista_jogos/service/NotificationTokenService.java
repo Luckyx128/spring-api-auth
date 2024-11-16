@@ -2,6 +2,7 @@ package com.app.lista_jogos.service;
 
 import java.util.Optional;
 
+import com.app.lista_jogos.handler.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +25,17 @@ public class NotificationTokenService {
         NotificationTokenEntity notificationTokenNew = new NotificationTokenEntity(notificationTokenDTO);
 
         Optional<UserEntity> userEntity = userRepository.findByUsername(notificationTokenDTO.getUsername());
-
+        if(userEntity.isEmpty()){
+            throw new BusinessException("Usuario não encontrado");
+        }
         Optional<NotificationTokenEntity> notificationTokenOld = notificationTokenRepository.findByUserEntity(userEntity.get());
         if (notificationTokenOld.isPresent()){
 
-            System.out.println("Atualizando token!");
             NotificationTokenEntity notificationToken = notificationTokenOld.get();
             notificationToken.setToken(notificationTokenDTO.getToken());
             notificationTokenRepository.save(notificationToken);
 
         } else {
-
-            System.out.println("Salvando novo token!");
             notificationTokenNew .setUserEntity(userEntity.get());
             notificationTokenRepository.save(notificationTokenNew);
 

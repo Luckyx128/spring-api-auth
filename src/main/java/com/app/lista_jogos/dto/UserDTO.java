@@ -11,16 +11,17 @@ public class UserDTO {
 	private String password;
 	private String phone_number;
 	private String email;
-	private Long   role;
+	private String   role;
 	
-	public Long getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(Long role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public UserDTO(UserEntity usuario) {
 		BeanUtils.copyProperties(usuario, this);
+		this.setRole(usuario.getRole());
 	}
 	public UserDTO() {
 		

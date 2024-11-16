@@ -4,6 +4,7 @@ import com.app.lista_jogos.dto.UserDTO;
 
 import java.util.List;
 
+import com.app.lista_jogos.handler.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,13 +33,16 @@ public class UserController {
 			return userService.listAll();
 		}
 		
-		@GetMapping(value = "/{id}")
-		public UserDTO buscarUsuarioPeloId(@PathVariable("id") String id) {
-			return userService.buscarPorId(id);
+		@GetMapping(value = "/{username}")
+		public UserDTO buscarUsuarioPeloId(@PathVariable("username") String username) {
+			return userService.buscarPorId(username);
 		}
 
 		@PostMapping(value = "/cadastrar")
 		public void insert(@RequestBody UserDTO usuario) {
+			if(usuario.getEmail().isBlank()||usuario.getName().isBlank()||usuario.getUsername().isBlank()||usuario.getPassword().isBlank() ){
+				throw new BusinessException("Nome, Email, Senha e username são obrigatórios");
+			}
 			userService.insert(usuario);
 		}
 		

@@ -25,7 +25,7 @@ public class AuthController {
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto){
 		if(authDto.getUsername().isBlank() || authDto.getPassword().isBlank()) {
-			throw new BusinessException("O login e senja são obrigatórios");
+			throw new BusinessException("O login e senha são obrigatórios");
 		}
 		return ResponseEntity.ok(authService.login(authDto));
 	}

@@ -32,7 +32,7 @@ public class UserEntity {
     @Column(name = "password",nullable = false)
     private String password;
        
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name =  "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_user_role"))
     private RoleEntity roleEntity;
     
@@ -59,9 +59,13 @@ public class UserEntity {
 		return Objects.equals(username, other.username);
 	}
 
-	public void setRole(RoleEntity roleEntity2) {
-				this.roleEntity = roleEntity2;
+	public void setRole(RoleEntity roleEntity) {
+				this.roleEntity = roleEntity;
 					
+	}
+
+	public String getRole(){
+		return this.roleEntity.getName();
 	}
 
 }

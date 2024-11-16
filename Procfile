@@ -1,0 +1,1 @@
+web: java -jar target/lista-jogos-api-0.5..jar
